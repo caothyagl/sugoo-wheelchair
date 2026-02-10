@@ -1,0 +1,20 @@
+@use '../abstracts' as *;
+
+/*------------------------------------------------------------
+    Base
+------------------------------------------------------------*/
+body {
+  overflow-x: hidden;
+  color: $black-01;
+  background: $white-01;
+  font-family: $jp-fonts;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  text-size-adjust: 100%;
+  word-break: break-all;
+
+  @include sp {
+    min-width: 320px;
+  }
+}

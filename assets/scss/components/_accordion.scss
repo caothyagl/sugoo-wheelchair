@@ -1,0 +1,102 @@
+@use '../abstracts/' as *;
+@use 'sass:color';
+
+.c-faq {
+  max-width: 940px;
+  margin: 23px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.c-faq__item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+/* QUESTION */
+.c-faq__question {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+}
+
+.c-faq__question:hover {
+  background: #fafafa;
+}
+
+.c-faq__question figure {
+  width: 28px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.c-faq__question img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.c-faq__question-text {
+  flex: 1;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #515151;
+}
+
+/* ARROW */
+.c-faq__arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #979797;
+  border-bottom: 2px solid #979797;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+/* ANSWER */
+.c-faq__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.c-faq__answer-inner {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+}
+
+.c-faq__answer-inner figure {
+  width: 38px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.c-faq__answer-inner img {
+  width: 100%;
+  height: auto;
+}
+
+.c-faq__answer-inner p {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: #515151;
+}
+
+/* OPEN STATE */
+.c-faq__item.is-open .c-faq__answer {
+  max-height: 500px;
+  /* đủ lớn cho content */
+}
+
+.c-faq__item.is-open .c-faq__arrow {
+  transform: rotate(-135deg);
+}

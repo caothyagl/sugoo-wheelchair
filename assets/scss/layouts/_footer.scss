@@ -1,0 +1,124 @@
+@use '../abstracts/' as *;
+
+/*------------------------------------------------------------
+    Footer
+------------------------------------------------------------*/
+.c-footer {
+    position: relative;
+    background: #fff;
+    padding: 80px 0 0;
+    overflow: hidden;
+
+    .l-container {
+        max-width: 944px;
+        position: relative;
+    }
+
+    /* background wheelchair */
+    &__bg {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        pointer-events: none;
+
+        img {
+            max-width: 396px;
+            height: auto;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 590px;
+        margin: 0 0 0 auto;
+    }
+
+    /* logo */
+    &__logo {
+        margin-bottom: 40px;
+        position: relative;
+        text-align: center;
+        width: 100%;
+
+        &::before,
+        &::after {
+            position: absolute;
+            content: "";
+            background: #EBEBEB;
+            width: 181px;
+            height: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::before {
+            left: 0;
+        }
+
+        &::after {
+            right: 0;
+        }
+
+        a {
+            display: block;
+        }
+
+        img {
+            width: 147px;
+        }
+    }
+
+    /* nav */
+    &__nav {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        width: 100%;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        padding: 10px;
+        position: relative;
+        border-bottom: 1px dashed #BCBCBC;
+        color: #2A2A2A;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0 10px;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    a {
+        font-size: 1.5rem;
+        color: #9E9E9E;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .copy-right {
+        background-image: url('../images/common/bg-footer.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding: 5px;
+        text-align: center;
+        color: #fff;
+        margin-top: 50px;
+    }
+}
