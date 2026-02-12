@@ -32,7 +32,7 @@
           <span class="badge"></span>
           <div>
             <p class="title">両式（自走・介助）</p>
-            <p class="price">レンタル料金　750円/日</p>
+            <p class="price">レンタル料金　<span>750</span>円/日</p>
           </div>
         </div>
         <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/img-popup.png" alt="">
@@ -49,7 +49,7 @@
           <span class="badge"></span>
           <div>
             <p class="title">両式11111</p>
-            <p class="price">レンタル料金　750円/日</p>
+            <p class="price">レンタル料金　<span>750</span>円/日</p>
           </div>
         </div>
         <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/img-popup.png" alt="">
@@ -73,7 +73,7 @@
     
     <!-- Tabs -->
     <ul class="wheelchair-modal__tabs">
-      <li>車いす種類</li>
+      <li class="is-completed">車いす種類</li>
       <li class="is-active">お届け先エリア</li>
       <li>日数</li>
     </ul>
@@ -164,13 +164,13 @@
 
     <!-- Tabs -->
     <ul class="wheelchair-modal__tabs">
-      <li>車いす種類</li>
-      <li>お届け先エリア</li>
+      <li class="is-completed">車いす種類</li>
+      <li class="is-completed">お届け先エリア</li>
       <li class="is-active">日数</li>
     </ul>
 
     <!-- Content -->
-    <div class="wheelchair-modal__content">
+    <div class="wheelchair-modal__list">
 
       <p class="days-title">利用日数を選択する</p>
 
@@ -197,35 +197,61 @@
 
     <h3 class="result-title">‐お見積り結果-</h3>
 
-    <!-- Total -->
-    <div class="result-total">
-      <p class="label">合計</p>
-      <p class="price">
-        <span class="js-result-total">0</span>円
-        <small>（税込）</small>
-      </p>
+    <div class="result-box">
+      <!-- Total -->
+      <div class="result-head">
+        <h4 class="result-head__title"><span>お見積り総額</span></h4>
+        <div class="result-head__total">
+          <p class="result-head__label">合計</p>
+          <p class="result-head__price">
+            <span class="js-result-total">0</span>円
+            <small>（税込）</small>
+          </p>
+        </div>
+        <div class="result-head__note">
+          <span>車いす即日レンタル　スグー</span>
+          <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/img-wheelchair-result.png" alt="">
+        </div>
+
+        <!-- Detail -->
+        <div class="result-detail">
+          <h3 class="result-detail__title"><span class="js-result-type"></span>車いす</h3>
+          <div class="result-detail__info">
+            <figure><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/sample.png" alt=""></figure>
+            <div class="result-detail__content">
+              <p>
+                <span class="js-result-prefecture"></span><span class="js-result-city"></span> お届け
+              </p>
+              <p>
+                <span class="js-result-days"></span> レンタル
+              </p>
+            </div>
+          </div>
+          <!-- <p>
+            配送料：<span class="js-result-ship"></span>円
+          </p> -->
+        </div>
+      </div>
+
+       <!-- CTA -->
+      <div class="result-cta">
+        <h3 class="result-cta__title">お申込みはこちら</h3>
+        <div class="result-cta__list">
+          <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/icon-telephone.png" alt="">
+          <div class="result-cta__tel">0120-223-365</div>
+        </div>
+        <div class="result-cta__note">365日 年中無休　8:00〜21:00</div>
+      </div>
     </div>
 
-    <!-- Detail -->
-    <div class="result-detail">
-      <p class="js-result-type"></p>
-      <p>
-        <span class="js-result-prefecture"></span>
-        <span class="js-result-city"></span>
-      </p>
-      <p>
-        <span class="js-result-days"></span>日間 レンタル
-      </p>
-      <p>
-        配送料：<span class="js-result-ship"></span>円
-      </p>
+    <div class="result-customer">
+      <div class="result-customer__info">
+        <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/customer.png" alt="">
+        <p>レンタルに関する<br>ご不明点やご不安がございましたら<br>お気軽にご相談くださいませ。</p>
+      </div>
+      <div class="result-customer__content">専門のスタッフが誠心誠意ご対応致します</div>
     </div>
 
-    <!-- CTA -->
-    <div class="result-cta">
-      <p class="tel">0120-223-365</p>
-      <small>365日 年中無休　8:00〜21:00</small>
-    </div>
-
+    <div class="result-copyright">Personal  Life Japan Corp.</div>
   </div>
 </div>

@@ -170,7 +170,7 @@
                   <span class="top-rent__step__title">車椅子の種類</span>
                 </div>
                 <button class="top-rent__step__select" id="step1Display">
-                  <span class="step1-text">種類を選ぶ</span>
+                  <span class="step1-text"></span>
                   <span class="top-rent__step__arrow">≫</span>
                 </button>
                 <p class="top-rent__step__note">ご希望の条件を選択してください</p>

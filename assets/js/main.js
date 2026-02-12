@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { name: "邑楽郡大泉町", price: 18000 },
       { name: "邑楽郡邑楽町", price: 21200 },
     ],
-    栃木: [
+    栃木県: [
       { name: "宇都宮市", price: 26800 },
       { name: "足利市", price: 24500 },
       { name: "栃木市", price: 24000 },
@@ -488,8 +488,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".step1-text").textContent = title;
 
     openStep2Popup();
-    renderEstimate();
-    updateClearButtonState();
   }
 
   let wheelchairBound = false;
@@ -556,8 +554,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     openStep3Popup();
     renderDays();
-    renderEstimate();
-    updateClearButtonState();
   }
 
   /* prefecture */
@@ -655,8 +651,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateRentalPrice();
     calculateTotal();
     closeDaysPopup();
-    renderEstimate();
-    updateClearButtonState();
 
     renderResultPopup();
     resultModal.classList.add("is-open");
@@ -689,9 +683,14 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   const resultModal = document.getElementById("resultModal");
   const closeResultPopup = document.getElementById("closeResultPopup");
+  let resultConfirmed = false;
 
   closeResultPopup.addEventListener("click", () => {
     resultModal.classList.remove("is-open");
+    resultConfirmed = true;
+
+    renderEstimate();
+    updateClearButtonState();
   });
 
   function renderResultPopup() {
@@ -708,10 +707,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector(".js-result-city").textContent = order.step2.city;
 
-    document.querySelector(".js-result-days").textContent = order.step3.days;
+    document.querySelector(".js-result-days").textContent =
+      `${order.step3.days}日間`;
 
-    document.querySelector(".js-result-ship").textContent =
-      order.step2.ship.toLocaleString();
+    // document.querySelector(".js-result-ship").textContent =
+    //   order.step2.ship.toLocaleString();
   }
 
   function getPricePerDay(prices, days) {
@@ -785,6 +785,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ? getPricePerDay(order.step1.prices, order.step3.days)
         : 0;
 
+    document.querySelector(".step1-text").innerHTML =
+      order.step1?.title || "種類を選ぶ";
+
     // type
     document.querySelector(".js-type").innerHTML =
       order.step1?.title || "-------------";
@@ -813,11 +816,46 @@ document.addEventListener("DOMContentLoaded", () => {
       : "15";
 
     // total
-    document.querySelector(".js-total").innerHTML = order.total
-      ? `${order.total.toLocaleString()}`
-      : "-------";
+    const totalEl = document.querySelector(".js-total");
+
+    if (order.total && order.total > 0) {
+      const currentValue = parseInt(totalEl.textContent.replace(/,/g, "")) || 0;
+
+      animateNumber(totalEl, currentValue, order.total, 1000);
+    } else {
+      totalEl.textContent = "-------";
+    }
+    // document.querySelector(".js-total").innerHTML = order.total
+    //   ? `${order.total.toLocaleString()}`
+    //   : "-------";
 
     updateClearButtonState();
+  }
+
+  function animateNumber(element, start, end, duration = 1000) {
+    let startTime = null;
+
+    function animation(currentTime) {
+      if (!startTime) startTime = currentTime;
+
+      const progress = currentTime - startTime;
+      const percent = Math.min(progress / duration, 1);
+
+      // ease-out mượt
+      const easeOut = 1 - Math.pow(1 - percent, 3);
+
+      const value = Math.floor(start + (end - start) * easeOut);
+
+      element.textContent = value.toLocaleString();
+
+      if (percent < 1) {
+        requestAnimationFrame(animation);
+      } else {
+        element.textContent = end.toLocaleString();
+      }
+    }
+
+    requestAnimationFrame(animation);
   }
 
   function updateClearButtonState() {
