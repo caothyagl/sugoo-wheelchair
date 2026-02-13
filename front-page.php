@@ -179,7 +179,7 @@
               <div class="top-rent__step__list">
                 <div class="top-rent__step__col">
                   <!-- Step 2 -->
-                  <div class="top-rent__step__item is-disabled">
+                  <div class="top-rent__step__item top-rent__step__item--disabled is-disabled">
                     <div class="top-rent__step__head">
                       <span class="top-rent__step__num">2</span>
                       <span class="top-rent__step__title">お届け先のエリア</span>
@@ -191,7 +191,7 @@
                   </div>
 
                   <!-- Step 3 -->
-                  <div class="top-rent__step__item is-disabled">
+                  <div class="top-rent__step__item top-rent__step__item--disabled is-disabled">
                     <div class="top-rent__step__head">
                       <span class="top-rent__step__num">3</span>
                       <span class="top-rent__step__title">レンタル日数</span>
@@ -330,8 +330,6 @@
                 </div>
                 <figure><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/option-item-05.png" alt=""></figure>
               </div>
-
-
             </div>
 
             <div class="top-rent__bottom-content">
@@ -339,8 +337,6 @@
             </div>
           </div>
         </div>
-
-     
       </div>
     </div>
   </section>

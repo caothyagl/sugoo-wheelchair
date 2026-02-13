@@ -21,7 +21,10 @@
     <!-- List -->
     <div class="wheelchair-modal__list">
       <!-- item -->
-      <div class="wheelchair-item" data-id="1" data-title="両式（自走・介助）" data-prices='{
+      <div class="wheelchair-item" 
+          data-id="1" 
+          data-title="両式（自走・介助）"
+          data-prices='{
             "1": 3300,
             "3": 3800,
             "7": 4500,
@@ -38,7 +41,10 @@
         <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/img-popup.png" alt="">
       </div>
 
-      <div class="wheelchair-item" data-id="1" data-title="両式1111111" data-prices='{
+      <div class="wheelchair-item" 
+          data-id="2" 
+          data-title="両式1111111" 
+          data-prices='{
             "1": 5000,
             "3": 6000,
             "7": 7000,
@@ -172,7 +178,7 @@
     <!-- Content -->
     <div class="wheelchair-modal__list">
 
-      <p class="days-title">利用日数を選択する</p>
+       <p class="days-title">利用日数を選択する</p>
 
       <div class="days-grid" id="daysGrid">
         <!-- JS render 1〜31 -->
@@ -215,21 +221,18 @@
 
         <!-- Detail -->
         <div class="result-detail">
-          <h3 class="result-detail__title"><span class="js-result-type"></span>車いす</h3>
+          <h3 class="result-detail__title"><span class="js-result-type is-editable"></span>車いす</h3>
           <div class="result-detail__info">
             <figure><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/sample.png" alt=""></figure>
             <div class="result-detail__content">
               <p>
-                <span class="js-result-prefecture"></span><span class="js-result-city"></span> お届け
+                <strong class="js-result-pre-city is-editable"><span class="js-result-prefecture"></span><span class="js-result-city"></span></strong> お届け
               </p>
               <p>
-                <span class="js-result-days"></span> レンタル
+                <span class="js-result-days is-editable"></span> レンタル
               </p>
             </div>
           </div>
-          <!-- <p>
-            配送料：<span class="js-result-ship"></span>円
-          </p> -->
         </div>
       </div>
 

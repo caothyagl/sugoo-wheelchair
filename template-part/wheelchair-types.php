@@ -1,8 +1,25 @@
 <div class="wheelchair-types__grid">
-  <div class="wheelchair-types__card" data-title="両式（自走･介助）"
-     data-image="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-01.jpg"
-     data-price="750"
-     data-desc="ご自身の腕でこぎ進めることもでき、背部から介助者に押してもらうこともできる両方の動かし方ができる車椅子です">
+  <div class="wheelchair-types__card" 
+    data-title="両式（自走･介助）"
+    data-image='[
+      "<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-01.jpg",
+      "<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-02.jpg",
+      "<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-03.jpg"
+    ]'
+    data-price="750"
+    data-pricemonth="5040"
+    data-desc="ご自身の腕でこぎ進めることもでき、背部から介助者に押してもらうこともできる両方の動かし方ができる車椅子です"
+    data-note='[
+      {"term":"主な機能","desc":"背張り調整"},
+      {"term":"カラー","desc":"イエロー・グリーン・ブルー・ワインレッド"},
+      {"term":"サイズ","desc":"幅55 × 長さ96 × 高さ91cm"},
+      {"term":"折畳サイズ","desc":"幅29 × 長さ96 × 高さ66cm"},
+      {"term":"座幅","desc":"40cm"},
+      {"term":"座面高","desc":"42cm"},
+      {"term":"車輪サイズ","desc":"前輪：6cm / 後輪：22cm"},
+      {"term":"付属クッション高","desc":"4cm"},
+      {"term":"重量","desc":"11.4kg"}
+    ]'>
     <h3>両式 <span>（自走･介助）</span></h3>
     <div class="wheelchair-types__card-content">
       <figure><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-01.jpg" alt="両式（自走･介助） "></figure>
@@ -15,7 +32,7 @@
     </div>
   </div>
 
-  <div class="wheelchair-types__card">
+  <!-- <div class="wheelchair-types__card">
     <h3>介助式</h3>
     <div class="wheelchair-types__card-content">
       <figure><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/top/types-wheelchair-02.jpg" alt="介助式 "></figure>
@@ -115,7 +132,7 @@
         <div class="wheelchair-types__card-note">専門のスタッフが誠心誠意ご対応致します</div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>
 
@@ -161,91 +178,58 @@
     <div class="product-modal__inner">
       <div class="l-container">
         <div class="product-modal__box">
-          <h3 class="product-modal__title" id="modalTitle"></h3>
+          <div class="product-modal__title">
+            <h3 id="modalTitle"></h3>
+            <span>解説</span>
+          </div>
           
           <div class="product-modal__list">
             <div class="product-modal__image">
               <div class="product-modal__swiper">
-                <img src="" alt="" id="modalImage">
+                <div class="swiper main-slide">
+                  <div class="swiper-wrapper"></div>
+                </div>
+                <div thumbsSlider="" class="swiper thumbnail-slide">
+                  <div class="swiper-wrapper"></div>
+                </div>
               </div>
               <p class="product-modal__content" id="modalDesc"></p>
             </div>
 
             <div class="product-modal__info">
               <h3 class="product-modal__info-title">エコールチェアライト</h3>
-              <div class="product-modal_info-type">
+              <div class="product-modal__info-type">
                 <span>Ecole Chair Light</span>
                 <span>メーカー： 日進医療器</span>
               </div>
               <div class="product-modal__price">
-                レンタル料金
-                <strong><span id="modalPrice"></span>円/日</strong>
-                <strong><span id="modalPriceMonth"></span>円/月</strong>
+                <div class="product-modal__price-box">
+                  <p>レンタル料金</p>
+                  <div class="product-modal__price-all">
+                    <strong><span id="modalPrice"></span>円/日</strong>
+                    <strong><span id="modalPriceMonth"></span>円/月</strong>
+                  </div>
+                </div>
               </div>
               <div class="product-modal__description">
-                <h4 class="product-modal__description-title">シンプルさの中にもやさしさを散りばめたスタンダードな自走用車いすです。</h4>
-                <ul>
-                  <li>軽量でコンパクト、かつJIS認証で使いやすく安全な車いす。</li>
-                  <li>ワイドレッグパイプや背張り調整などの機能で使う方の快適性を追求しました。</li>
-                  <li>軽量タイプですので介助者の負担も軽減されます。</li>
-                  <li>クッションを標準装備しています。</li>
-                </ul>
+                <div class="product-modal__description-box">
+                  <h4 class="product-modal__description-title">シンプルさの中にもやさしさを散りばめたスタンダードな自走用車いすです。</h4>
+                  <ul>
+                    <li>軽量でコンパクト、かつJIS認証で使いやすく安全な車いす。</li>
+                    <li>ワイドレッグパイプや背張り調整などの機能で使う方の快適性を追求しました。</li>
+                    <li>軽量タイプですので介助者の負担も軽減されます。</li>
+                    <li>クッションを標準装備しています。</li>
+                  </ul>
 
-                <button class="product-modal__btn">
-                  <img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/common/btn-action.png" alt="">
-                </button>
+                  <div class="product-modal__btn">
+                    <button class="js-select-product"><img src="<?php echo get_stylesheet_directory_uri();?>/assets/images/common/btn-action.png" alt=""></button>
+                  </div>
 
-                <div class="product-modal__spec">
-                  <h5 class="product-modal__spec-title">詳細情報</h5>
+                  <div class="product-modal__spec">
+                    <h5 class="product-modal__spec-title">詳細情報</h5>
 
-                  <dl class="product-modal__spec-list">
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">主な機能</dt>
-                      <dd class="product-modal__spec-desc">背張り調整</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">カラー</dt>
-                      <dd class="product-modal__spec-desc">
-                        イエロー・グリーン・ブルー・ワインレッド
-                      </dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">サイズ</dt>
-                      <dd class="product-modal__spec-desc">幅55 × 長さ96 × 高さ91cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">折畳サイズ</dt>
-                      <dd class="product-modal__spec-desc">幅29 × 長さ96 × 高さ66cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">座幅</dt>
-                      <dd class="product-modal__spec-desc">40cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">座面高</dt>
-                      <dd class="product-modal__spec-desc">42cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">車輪サイズ</dt>
-                      <dd class="product-modal__spec-desc">前輪：6cm / 後輪：22cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">付属クッション高</dt>
-                      <dd class="product-modal__spec-desc">4cm</dd>
-                    </div>
-
-                    <div class="product-modal__spec-row">
-                      <dt class="product-modal__spec-term">重量</dt>
-                      <dd class="product-modal__spec-desc">11.4kg</dd>
-                    </div>
-                  </dl>
+                    <dl class="product-modal__spec-list" id="modalSpecList"></dl>
+                  </div>
                 </div>
               </div>
             </div>
@@ -288,8 +272,8 @@
           </div>
         </div>
       </div>
-    </div>
 
-   
+      <div class="product-modal__copyright">Personal  Life Japan Corp.</div>
+    </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let editMode = null;
   const AREA_DATA = {
     東京都: [
       { name: "葛飾区", price: 7700 },
@@ -434,7 +435,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("step1Display");
   const modal = document.getElementById("wheelchairModal");
   const closeBtn = document.getElementById("closeWheelchairPopup");
-  const items = document.querySelectorAll(".wheelchair-item");
   const clearBtn = document.querySelector(".js-clear-order");
 
   /* ======================
@@ -456,8 +456,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
-      localStorage.removeItem("wheelchairOrder");
-      location.reload();
+      resetOrderUI();
+      clearBtn.disabled = true;
+      openStep1Popup();
     });
   }
 
@@ -484,9 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
     order.step1 = { id, title, prices };
     saveOrder(order);
 
-    // UI
-    document.querySelector(".step1-text").textContent = title;
-
+    modal.classList.remove("is-open");
     openStep2Popup();
   }
 
@@ -510,8 +509,6 @@ document.addEventListener("DOMContentLoaded", () => {
         title: item.dataset.title,
         prices: JSON.parse(item.dataset.prices),
       });
-
-      modal.classList.remove("is-open");
     });
   }
 
@@ -520,7 +517,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   const areaModal = document.getElementById("areaModal");
   const closeAreaPopup = document.getElementById("closeAreaPopup");
-  const closeCityPopup = document.getElementById("closeCityPopup");
   const cityList = document.getElementById("cityList");
 
   const cityBlock = document.querySelector(".area-block--city");
@@ -552,6 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cityText.textContent = `${city}`;
     shipText.textContent = `¥${ship.toLocaleString()}`;
 
+    areaModal.classList.remove("is-open");
     openStep3Popup();
     renderDays();
   }
@@ -656,6 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultModal.classList.add("is-open");
   }
 
+  let daysBound = false;
   function renderDays() {
     let html = "";
 
@@ -664,11 +662,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     daysGrid.innerHTML = html;
+    if (daysBound) return;
+    daysBound = true;
 
     daysGrid.addEventListener("click", (e) => {
       const btn = e.target.closest(".day-item");
       if (!btn) return;
 
+      // clear days active
       daysGrid
         .querySelectorAll(".day-item")
         .forEach((b) => b.classList.remove("is-active"));
@@ -683,11 +684,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   const resultModal = document.getElementById("resultModal");
   const closeResultPopup = document.getElementById("closeResultPopup");
-  let resultConfirmed = false;
 
   closeResultPopup.addEventListener("click", () => {
     resultModal.classList.remove("is-open");
-    resultConfirmed = true;
 
     renderEstimate();
     updateClearButtonState();
@@ -697,8 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const order = getOrder();
     if (!order.step1 || !order.step2 || !order.step3 || !order.total) return;
 
-    document.querySelector(".js-result-total").textContent =
-      order.total.toLocaleString();
+    const totalEl = document.querySelector(".js-result-total");
 
     document.querySelector(".js-result-type").textContent = order.step1.title;
 
@@ -710,8 +708,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".js-result-days").textContent =
       `${order.step3.days}日間`;
 
-    // document.querySelector(".js-result-ship").textContent =
-    //   order.step2.ship.toLocaleString();
+    totalEl.textContent = "0";
+
+    animateNumber(totalEl, 0, order.total, 1000);
   }
 
   function getPricePerDay(prices, days) {
@@ -746,6 +745,59 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
+  STEP 4 – Edit from Result
+  ====================== */
+  function bindResultEdit() {
+    const typeEl = document.querySelector(".js-result-type");
+    const preCityEl = document.querySelector(".js-result-pre-city");
+    const daysEl = document.querySelector(".js-result-days");
+
+    // Edit type → open modal step1
+    typeEl?.addEventListener("click", () => {
+      resultModal.classList.remove("is-open");
+      document
+        .querySelectorAll(".wheelchair-item")
+        .forEach((item) => item.classList.remove("is-selected"));
+
+      document
+        .querySelectorAll('input[name="prefecture"]')
+        .forEach((radio) => (radio.checked = false));
+
+      // remove check city
+      document
+        .querySelectorAll('input[name="city"]')
+        .forEach((radio) => (radio.checked = false));
+      openStep1Popup();
+    });
+
+    // Edit area → open modal step2
+    preCityEl?.addEventListener("click", () => {
+      resultModal.classList.remove("is-open");
+      // remove check prefecture
+      document
+        .querySelectorAll('input[name="prefecture"]')
+        .forEach((radio) => (radio.checked = false));
+
+      // remove check city
+      document
+        .querySelectorAll('input[name="city"]')
+        .forEach((radio) => (radio.checked = false));
+      openStep2Popup();
+    });
+
+    // Edit days → open modal step3
+    daysEl?.addEventListener("click", () => {
+      resultModal.classList.remove("is-open");
+      document
+        .querySelectorAll(".day-item")
+        .forEach((item) => item.classList.remove("is-active"));
+      openStep3Popup();
+    });
+  }
+
+  bindResultEdit();
+
+  /* ======================
     Get Day and Total
   ====================== */
   function getDayTier(days) {
@@ -764,14 +816,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const days = order.step3.days;
     const tier = getDayTier(days);
 
-    const rentPrice = order.step1.prices[tier];
+    const dayPrice = order.step1.prices[tier];
     const shipPrice = order.step2.ship || 0;
     const optionPrice = 15500;
 
-    order.total = rentPrice + shipPrice + optionPrice;
+    order.total = dayPrice + shipPrice + optionPrice;
     order.appliedTier = tier;
 
     saveOrder(order);
+  }
+
+  /* ======================
+    Reset UI
+  ====================== */
+  function resetOrderUI() {
+    localStorage.removeItem("wheelchairOrder");
+
+    editMode = null;
+
+    /* ===== RESET STEP 1 ===== */
+    document
+      .querySelectorAll(".wheelchair-item")
+      .forEach((item) => item.classList.remove("is-selected"));
+
+    document.querySelector(".step1-text").textContent = "種類を選ぶ";
+    document.querySelector(".js-type").textContent = "-------------";
+    document.querySelector(".js-area").textContent = "都道府県";
+    document.querySelector(".js-city").textContent = "区市町村";
+    document.querySelector(".js-days").textContent = "15";
+    document.querySelector(".js-total").textContent = "-------";
+    document.querySelector(".js-price-per-day").textContent = "----";
+
+    /* ===== RESET STEP 2 ===== */
+
+    // remove check prefecture
+    document
+      .querySelectorAll('input[name="prefecture"]')
+      .forEach((radio) => (radio.checked = false));
+
+    // remove check city
+    document
+      .querySelectorAll('input[name="city"]')
+      .forEach((radio) => (radio.checked = false));
+
+    const stepItems = document.querySelectorAll(
+      ".top-rent__step__item--disabled",
+    );
+
+    stepItems.forEach((item) => {
+      item.classList.add("is-disabled");
+    });
+
+    resultModal.classList.remove("is-open");
+    areaModal.classList.remove("is-open");
+    daysModal.classList.remove("is-open");
   }
 
   /* ======================
@@ -793,8 +891,8 @@ document.addEventListener("DOMContentLoaded", () => {
       order.step1?.title || "-------------";
 
     // price per day
-    document.querySelector(".js-price-per-day").textContent =
-      perDay > 0 ? perDay.toLocaleString() : "----";
+    document.querySelector(".js-price-per-day").innerHTML =
+      perDay > 0 ? `${perDay.toLocaleString()}` : "----";
 
     // area
     document.querySelector(".js-area").innerHTML = order.step2?.prefecture
@@ -813,7 +911,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // days
     document.querySelector(".js-days").innerHTML = order.step3?.days
       ? `${order.step3.days}`
-      : "15";
+      : "15日";
 
     // total
     const totalEl = document.querySelector(".js-total");
@@ -825,9 +923,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       totalEl.textContent = "-------";
     }
-    // document.querySelector(".js-total").innerHTML = order.total
-    //   ? `${order.total.toLocaleString()}`
-    //   : "-------";
 
     updateClearButtonState();
   }
